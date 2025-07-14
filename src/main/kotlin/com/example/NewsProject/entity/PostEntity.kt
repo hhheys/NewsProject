@@ -3,7 +3,6 @@ package com.example.NewsProject.entity
 import jakarta.persistence.*
 import java.util.UUID
 
-
 @Entity
 @Table(name = "post")
 class PostEntity {
@@ -23,7 +22,15 @@ class PostEntity {
     @Column(name = "view_count")
     val viewCount: Long? = null
 
-    @ManyToMany
-    @JoinColumn(name = "topic_uuid", referencedColumnName = "id", foreignKey = ForeignKey(name = "post_entity_topic_id_fk"))
-    val topic: List<TopicEntity>? = null
+    @OneToMany
+    @JoinColumn(
+        name = "topic_uuid",
+        referencedColumnName = "id",
+        foreignKey = ForeignKey(name = "post_entity_topic_id_fk")
+    )
+    val topic: MutableList<TopicEntity>? = null
+
+    @Transient
+    @OneToMany
+    val comments: MutableList<CommentEntity>? = null
 }
