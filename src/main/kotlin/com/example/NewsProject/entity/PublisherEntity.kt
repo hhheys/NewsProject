@@ -5,6 +5,7 @@ import jakarta.persistence.Column
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 import jakarta.persistence.ForeignKey
+import jakarta.persistence.OneToMany
 import jakarta.persistence.PrimaryKeyJoinColumn
 import jakarta.persistence.Table
 
@@ -18,4 +19,8 @@ class PublisherEntity: AccountEntity() {
 
     @Column(name = "legal_adress")
     var legalAdress: String? = null
+
+    @OneToMany
+    @Transient
+    var postEntities: MutableList<PostEntity> = mutableListOf()
 }
