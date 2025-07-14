@@ -33,4 +33,12 @@ class PostEntity {
     @Transient
     @OneToMany
     val comments: MutableList<CommentEntity>? = null
+
+    @ManyToOne
+    @JoinColumn(
+        name = "publisher_uuid",
+        referencedColumnName = "id",
+        foreignKey = ForeignKey(name = "post_entity_publisher_fk")
+    )
+    var publisher: PublisherEntity? = null
 }
