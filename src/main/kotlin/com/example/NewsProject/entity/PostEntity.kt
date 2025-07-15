@@ -22,11 +22,11 @@ class PostEntity {
     @Column(name = "view_count")
     val viewCount: Long? = null
 
-    @OneToMany
-    @JoinColumn(
-        name = "topic_uuid",
-        referencedColumnName = "id",
-        foreignKey = ForeignKey(name = "post_entity_topic_id_fk")
+    @ManyToMany
+    @JoinTable(
+        name = "post_topic",
+        joinColumns = [JoinColumn(name = "post_id")],
+        inverseJoinColumns = [JoinColumn(name = "topic_id")]
     )
     val topic: MutableList<TopicEntity>? = null
 
