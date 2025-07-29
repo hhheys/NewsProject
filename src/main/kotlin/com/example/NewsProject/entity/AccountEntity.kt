@@ -15,7 +15,7 @@ import java.util.UUID
 @Table(name = "account")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorValue("ACCOUNT")
-@DiscriminatorColumn(name = "disc", discriminatorType = DiscriminatorType.STRING, length = 20)
+//@DiscriminatorColumn(name = "disc", discriminatorType = DiscriminatorType.STRING, length = 20)
 abstract class AccountEntity {
     @Id
     @Column(name = "id")
@@ -24,6 +24,6 @@ abstract class AccountEntity {
     @Column(name = "name")
     var name: String? = null
 
-    @Column(name = "mail")
-    var mail: String? = null
+    @Column(name = "email")
+    var email: String? = null
 }

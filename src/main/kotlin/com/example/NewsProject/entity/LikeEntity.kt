@@ -8,8 +8,12 @@ import jakarta.persistence.PrimaryKeyJoinColumn
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "like")
-@PrimaryKeyJoinColumn(referencedColumnName = "id", foreignKey = ForeignKey(name = "like_reacrion_fk"))
-@DiscriminatorValue(LIKE)
-class LikeEntity: ReactionEntity() {
+@Table(name = "like_entity")
+@PrimaryKeyJoinColumn(
+    name = "reaction_uuid",
+    referencedColumnName = "id",
+    foreignKey = ForeignKey(name = "like_reaction_fk")
+)
+//@DiscriminatorValue(LIKE)
+class LikeEntity : ReactionEntity() {
 }
