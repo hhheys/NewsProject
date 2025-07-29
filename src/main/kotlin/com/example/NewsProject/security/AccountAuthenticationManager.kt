@@ -23,7 +23,7 @@ class AccountAuthenticationManager(
             throw BadCredentialsException("Incorrect password")
         }
 
-        val authorities = listOf(SimpleGrantedAuthority("ROLE_${account.accountType}")) // TODO: FIX
+        val authorities = listOf(SimpleGrantedAuthority("ROLE_${account.accountType}"))
         return UsernamePasswordAuthenticationToken(
             name,
             account.password,
