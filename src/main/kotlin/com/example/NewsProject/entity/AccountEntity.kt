@@ -5,6 +5,8 @@ import jakarta.persistence.DiscriminatorColumn
 import jakarta.persistence.DiscriminatorType
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Inheritance
 import jakarta.persistence.InheritanceType
@@ -18,6 +20,7 @@ import java.util.UUID
 @DiscriminatorColumn(name = "account_type", discriminatorType = DiscriminatorType.STRING, length = 20)
 abstract class AccountEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     var id: UUID? = null
 
@@ -31,5 +34,5 @@ abstract class AccountEntity {
     var email: String? = null
 
     @Column(name = "account_type", insertable = false, updatable = false)
-    val accountType: String? = null
+    var accountType: String? = null
 }
