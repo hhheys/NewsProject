@@ -18,5 +18,6 @@ class UserServiceImpl(
             this.role = user.role
             this.accountType = AccountTypes.USER
         }
+        userRepository.save(userEntity)
     }
 }

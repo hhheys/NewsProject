@@ -2,6 +2,7 @@ package com.example.NewsProject.service
 
 import com.example.NewsProject.consts.AccountTypes
 import com.example.NewsProject.dao.PublisherRepository
+import com.example.NewsProject.dao.UserRepository
 import com.example.NewsProject.dto.PublisherDto
 import com.example.NewsProject.entity.PublisherEntity
 import org.springframework.stereotype.Service
@@ -19,5 +20,6 @@ class PublisherServiceImpl(
             this.legalAddress = publisher.legalAddress
             this.accountType = AccountTypes.PUBLISHER
         }
+        publisherRepository.save(publisherEntity)
     }
 }
