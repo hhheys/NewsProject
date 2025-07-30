@@ -25,7 +25,7 @@ class PostEntity {
     @ManyToMany
     @JoinTable(
         name = "post_topic",
-        joinColumns = [JoinColumn(name = "post_id")],
+        joinColumns = [JoinColumn(name = "post_uuid")],
         inverseJoinColumns = [JoinColumn(name = "topic_id")]
     )
     val topic: MutableList<TopicEntity>? = null

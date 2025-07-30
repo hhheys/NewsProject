@@ -14,7 +14,7 @@ import java.util.UUID
 class TopicEntity {
     @Id
     @Column(name = "id")
-    val id: UUID? = null
+    val id: Int? = null
 
     @Column
     val name: String? = null
