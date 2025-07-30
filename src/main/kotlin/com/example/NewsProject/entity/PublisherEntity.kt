@@ -17,8 +17,8 @@ class PublisherEntity: AccountEntity() {
     @Column(name = "legal_name")
     var legalName: String? = null
 
-    @Column(name = "legal_adress")
-    var legalAdress: String? = null
+    @Column(name = "legal_address")
+    var legalAddress: String? = null
 
     @OneToMany
     @Transient

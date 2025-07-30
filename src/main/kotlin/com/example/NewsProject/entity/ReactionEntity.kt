@@ -17,8 +17,8 @@ import java.util.UUID
 @Entity
 @Table(name = "reaction")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorValue("RAEACTION")
-@DiscriminatorColumn(name = "disc", discriminatorType = DiscriminatorType.STRING, length = 20)
+//@DiscriminatorValue("RAEACTION")
+//@DiscriminatorColumn(name = "disc", discriminatorType = DiscriminatorType.STRING, length = 20)
 class ReactionEntity {
     @Id
     @Column(name = "id")
@@ -34,7 +34,7 @@ class ReactionEntity {
 
     @ManyToOne
     @JoinColumn(
-        name = "user_id",
+        name = "user_uuid",
         referencedColumnName = "id",
         foreignKey = ForeignKey(name = "resction_entity_user_fk")
     )
