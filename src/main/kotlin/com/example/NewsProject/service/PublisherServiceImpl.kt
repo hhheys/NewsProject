@@ -13,18 +13,19 @@ import java.util.*
 class PublisherServiceImpl(
     private val publisherRepository: PublisherRepository,
     private val passwordEncoder: PasswordEncoder
-): PublisherService {
+) : PublisherService {
     override fun findById(uuid: UUID): PublisherEntity {
         val publisherOptional = publisherRepository.findById(uuid)
 
-        val publisher = if (publisherOptional.isPresent){
+        val publisher = if (publisherOptional.isPresent) {
             publisherOptional.get()
         } else {
             throw BadRequestException("Publisher not found")
         }
         return publisher
-		
-		override fun addPublisher(publisher: PublisherDto) {
+    }
+
+    override fun addPublisher(publisher: PublisherDto) {
         val publisherEntity = PublisherEntity().apply {
             this.name = publisher.name
             this.password = passwordEncoder.encode(publisher.password)
