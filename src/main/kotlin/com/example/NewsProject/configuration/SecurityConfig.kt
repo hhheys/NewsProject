@@ -26,7 +26,7 @@ class SecurityConfig(
         http {
             authorizeHttpRequests {
 //                authorize(anyRequest, hasAuthority("ROLE_${AccountTypes.USER}"))
-                authorize(anyRequest, authenticated)
+                authorize(anyRequest, permitAll)
             }
             httpBasic { }
             csrf { disable() }
