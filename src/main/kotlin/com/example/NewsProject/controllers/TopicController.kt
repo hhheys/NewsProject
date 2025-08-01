@@ -1,7 +1,7 @@
 package com.example.NewsProject.controllers
 
 import com.example.NewsProject.dto.TopicDto
-import com.example.NewsProject.responce.TopicResponce
+import com.example.NewsProject.response.TopicResponse
 import com.example.NewsProject.service.TopicService
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,12 +18,12 @@ class TopicController(
     private val topicService: TopicService
 ) {
     @GetMapping("/{id}")
-    fun getTopic(@PathVariable id: Int) : TopicResponce {
+    fun getTopic(@PathVariable id: Int) : TopicResponse {
         return topicService.getTopicById(id)
     }
 
     @GetMapping("/all")
-    fun getTopics() : List<TopicResponce> {
+    fun getTopics() : List<TopicResponse> {
         return topicService.getAllTopics()
     }
 

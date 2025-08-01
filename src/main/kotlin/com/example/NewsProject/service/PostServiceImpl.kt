@@ -4,6 +4,7 @@ import com.example.NewsProject.dao.PostRepository
 import com.example.NewsProject.dto.PostCreateDto
 import com.example.NewsProject.dto.PostUpdateDto
 import com.example.NewsProject.entity.PostEntity
+import com.example.NewsProject.response.TopicResponse
 import com.example.NewsProject.response.PostResponse
 import jakarta.transaction.Transactional
 import org.apache.coyote.BadRequestException
@@ -63,5 +64,11 @@ class PostServiceImpl(
     @Transactional
     override fun deleteById(id: UUID){
         postRepository.deleteById(id)
+    }
+
+    @Transactional
+    override fun findPostsByTopicId(posts: List<PostResponse>, topics: List<TopicResponse>, topicId: Int): List<PostResponse> {
+        val topicName: String? = topics.find { it.id == topicId }?.name
+        return posts.filter { it.topics.contains<Any?>(topicName) }
     }
 }

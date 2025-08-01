@@ -3,7 +3,7 @@ package com.example.NewsProject.service
 import com.example.NewsProject.dao.TopicRepository
 import com.example.NewsProject.dto.TopicDto
 import com.example.NewsProject.entity.TopicEntity
-import com.example.NewsProject.responce.TopicResponce
+import com.example.NewsProject.response.TopicResponse
 import jakarta.transaction.Transactional
 import org.apache.coyote.BadRequestException
 import org.springframework.stereotype.Service
@@ -13,19 +13,19 @@ class TopicServiceImpl(
     private val topicRepository: TopicRepository
 ) : TopicService {
     @Transactional
-    override fun getTopicById(id: Int): TopicResponce {
+    override fun getTopicById(id: Int): TopicResponse {
         val optionalTopic = topicRepository.findById(id)
         return if (optionalTopic.isPresent) {
             val topic = optionalTopic.get()
-            TopicResponce(topic)
+            TopicResponse(topic)
         } else {
             throw BadRequestException("No topic with this id")
         }
     }
 
     @Transactional
-    override fun getAllTopics(): List<TopicResponce> {
-        return topicRepository.findAll().map { TopicResponce(it) }
+    override fun getAllTopics(): List<TopicResponse> {
+        return topicRepository.findAll().map { TopicResponse(it) }
     }
 
     @Transactional

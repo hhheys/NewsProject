@@ -4,6 +4,7 @@ import com.example.NewsProject.dto.PostCreateDto
 import com.example.NewsProject.dto.PostUpdateDto
 import com.example.NewsProject.entity.AccountEntity
 import com.example.NewsProject.response.PostResponse
+import com.example.NewsProject.response.TopicResponse
 import com.example.NewsProject.service.PostServiceImpl
 import org.apache.coyote.BadRequestException
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -39,5 +40,10 @@ class PostController(
     @DeleteMapping("/delete/{uuid}")
     fun deletePostByUUID(@PathVariable uuid: UUID) {
         postService.deleteById(uuid)
+    }
+
+    @GetMapping("&topic_id={topicId}")
+    fun findPostsByTopic(@RequestBody posts: List<PostResponse>, @RequestBody topics: List<TopicResponse>, @PathVariable topicId: Int) {
+        postService.findPostsByTopicId(posts, topics, topicId)
     }
 }
