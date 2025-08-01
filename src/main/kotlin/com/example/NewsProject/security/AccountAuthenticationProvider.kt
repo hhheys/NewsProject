@@ -26,7 +26,7 @@ class AccountAuthenticationProvider(
 
         val authorities = listOf(SimpleGrantedAuthority("ROLE_${account.accountType}"))
         return UsernamePasswordAuthenticationToken(
-            name,
+            account,
             account.password,
             authorities
         )

@@ -7,20 +7,21 @@ import java.util.UUID
 @Table(name = "post")
 class PostEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    val id: UUID? = null
+    var id: UUID? = null
 
     @Column(name = "title")
-    val title: String? = null
+    var title: String? = null
 
     @Column(name = "description")
-    val description: String? = null
+    var description: String? = null
 
     @Column(name = "content")
-    val content: String? = null
+    var content: String? = null
 
     @Column(name = "view_count")
-    val viewCount: Long? = null
+    var viewCount: Long? = 0
 
     @ManyToMany
     @JoinTable(
@@ -28,11 +29,11 @@ class PostEntity {
         joinColumns = [JoinColumn(name = "post_uuid")],
         inverseJoinColumns = [JoinColumn(name = "topic_id")]
     )
-    val topic: MutableList<TopicEntity>? = null
+    var topic: MutableList<TopicEntity>? = null
 
-    @Transient
-    @OneToMany
-    val comments: MutableList<CommentEntity>? = null
+//    @Transient
+//    @OneToMany
+//    var comments: MutableList<CommentEntity>? = null
 
     @ManyToOne
     @JoinColumn(
