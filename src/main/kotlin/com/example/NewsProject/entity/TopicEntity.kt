@@ -2,6 +2,8 @@ package com.example.NewsProject.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToMany
@@ -13,11 +15,12 @@ import java.util.UUID
 @Table(name = "topic")
 class TopicEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    val id: Int? = null
+    var id: Int? = null
 
     @Column
-    val name: String? = null
+    var name: String? = null
 
     @Transient
     @ManyToMany(mappedBy = "topic")

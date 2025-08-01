@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class AccountServiceImpl(
     private val accountRepository: AccountRepository
-): AccountService {
+) : AccountService {
     @Transactional
     override fun findByName(name: String): AccountEntity? {
         return accountRepository.findByName(name)

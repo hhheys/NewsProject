@@ -11,9 +11,9 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "publisher")
-@PrimaryKeyJoinColumn(referencedColumnName = "id",foreignKey = ForeignKey(name = "publisher_account_fk"))
+@PrimaryKeyJoinColumn(referencedColumnName = "id", foreignKey = ForeignKey(name = "publisher_account_fk"))
 @DiscriminatorValue(PUBLISHER)
-class PublisherEntity: AccountEntity() {
+class PublisherEntity : AccountEntity() {
     @Column(name = "legal_name")
     var legalName: String? = null
 

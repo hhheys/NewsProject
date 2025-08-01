@@ -13,6 +13,6 @@ import java.util.*
     referencedColumnName = "id", // ← имя колонки в reaction
     foreignKey = ForeignKey(name = "dislike_reaction_fk")
 )
-class DislikeEntity: ReactionEntity() {
+class DislikeEntity : ReactionEntity() {
 
 }

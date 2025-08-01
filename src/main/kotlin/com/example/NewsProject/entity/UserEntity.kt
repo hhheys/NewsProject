@@ -10,9 +10,9 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "user_entity")
-@PrimaryKeyJoinColumn(referencedColumnName = "id",foreignKey = ForeignKey(name = "user_account_fk"))
+@PrimaryKeyJoinColumn(referencedColumnName = "id", foreignKey = ForeignKey(name = "user_account_fk"))
 @DiscriminatorValue(USER)
-class UserEntity(): AccountEntity() {
+class UserEntity() : AccountEntity() {
     @Column(name = "role")
     var role: String? = null
 }

@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component
 class AccountAuthenticationProvider(
     private val accountServiceImpl: AccountServiceImpl,
     private val passwordEncoder: PasswordEncoder
-): AuthenticationProvider {
+) : AuthenticationProvider {
     override fun authenticate(authentication: Authentication): Authentication {
         val name = authentication.name ?: throw BadCredentialsException("Authorization token missing")
         val rawPassword = authentication.credentials.toString()
 
         val account = accountServiceImpl.findByName(name) ?: throw BadCredentialsException("Account not found")
 
-        if (!passwordEncoder.matches(rawPassword, account.password)){
+        if (!passwordEncoder.matches(rawPassword, account.password)) {
             throw BadCredentialsException("Incorrect password")
         }
 
