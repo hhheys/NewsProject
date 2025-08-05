@@ -4,6 +4,7 @@ import com.example.NewsProject.consts.AccountTypes
 import com.example.NewsProject.dao.PublisherRepository
 import com.example.NewsProject.entity.PublisherEntity
 import com.example.NewsProject.dto.PublisherDto
+import jakarta.transaction.Transactional
 import org.apache.coyote.BadRequestException
 import org.springframework.stereotype.Service
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -14,6 +15,7 @@ class PublisherServiceImpl(
     private val publisherRepository: PublisherRepository,
     private val passwordEncoder: PasswordEncoder
 ) : PublisherService {
+    @Transactional
     override fun findById(uuid: UUID): PublisherEntity {
         val publisherOptional = publisherRepository.findById(uuid)
 
@@ -25,6 +27,7 @@ class PublisherServiceImpl(
         return publisher
     }
 
+    @Transactional
     override fun addPublisher(publisher: PublisherDto) {
         val publisherEntity = PublisherEntity().apply {
             this.name = publisher.name

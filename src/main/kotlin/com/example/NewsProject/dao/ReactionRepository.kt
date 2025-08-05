@@ -2,7 +2,9 @@ package com.example.NewsProject.dao
 
 import com.example.NewsProject.entity.ReactionEntity
 import org.springframework.data.jpa.repository.JpaRepository
-import java.util.UUID
+import java.util.*
+
 
 interface ReactionRepository: JpaRepository<ReactionEntity, UUID> {
+    fun findFirstByPost_IdAndUser_Id(postId: UUID, userId: UUID): ReactionEntity?
 }
