@@ -1,4 +1,4 @@
-package com.example.NewsProject.service
+package com.example.NewsProject.service.post
 
 import com.example.NewsProject.dto.PostCreateDto
 import com.example.NewsProject.dto.PostUpdateDto
@@ -12,4 +12,5 @@ interface PostService {
     fun findAll(): List<PostResponse>
     fun updateById(id: UUID, postUpdateDto: PostUpdateDto): PostResponse
     fun deleteById(id: UUID)
+    fun incrementView(id: UUID)
 }

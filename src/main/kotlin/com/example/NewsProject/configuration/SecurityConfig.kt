@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.ProviderManager
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.invoke
 import org.springframework.security.web.SecurityFilterChain
@@ -12,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 //@EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 class SecurityConfig(
     private val accountAuthenticationProvider: AccountAuthenticationProvider
 ) {
@@ -24,10 +26,9 @@ class SecurityConfig(
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {
-            authorizeHttpRequests {
-//                authorize(anyRequest, hasAuthority("ROLE_${AccountTypes.USER}"))
-                authorize(anyRequest, permitAll)
-            }
+//            authorizeHttpRequests {
+////                authorize(anyRequest, hasAuthority("ROLE_user_entity"))
+//            }
             httpBasic { }
             csrf { disable() }
         }

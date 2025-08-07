@@ -7,8 +7,15 @@ services:
       - "0.0.0.0:5435:5432"
     container_name: "postgresql_backend"
     volumes:
-      - 'C:/Users/Тимофей/.docker/postgresql:/bitnami/postgresql'
+      - 'C:/Users/Dmitriy/.docker/postgresql:/bitnami/postgresql'
     environment:
       - POSTGRESQL_USERNAME=postgres
       - POSTGRESQL_PASSWORD=postgres
       - POSTGRESQL_DATABASE=news_project
+  redis-service:
+    image: redis:7.2-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - 'C:/Users/Dmitriy/.docker/redis:/alpine/redis'
