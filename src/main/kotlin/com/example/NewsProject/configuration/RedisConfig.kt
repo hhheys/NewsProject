@@ -6,6 +6,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.serializer.StringRedisSerializer
 
+
 @Configuration
 class RedisConfig {
 
@@ -14,7 +15,6 @@ class RedisConfig {
         val template = RedisTemplate<String, String>()
         template.connectionFactory = factory
 
-        // Используем String сериализаторы
         val stringSerializer = StringRedisSerializer()
         template.keySerializer = stringSerializer
         template.valueSerializer = stringSerializer
