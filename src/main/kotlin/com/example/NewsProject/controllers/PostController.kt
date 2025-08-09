@@ -3,6 +3,7 @@ package com.example.NewsProject.controllers
 import com.example.NewsProject.dto.PostCreateDto
 import com.example.NewsProject.dto.PostUpdateDto
 import com.example.NewsProject.entity.AccountEntity
+import com.example.NewsProject.entity.PostEntity
 import com.example.NewsProject.response.PostResponse
 import com.example.NewsProject.service.redis.RedisService
 import com.example.NewsProject.service.post.PostServiceImpl
@@ -23,11 +24,6 @@ class PostController(
         return postService.createPost(postCreateDto, uuid)
     }
 
-    @GetMapping
-    fun getAllPosts(): MutableList<PostResponse> {
-        return postService.findAll()
-    }
-
     @GetMapping("/{uuid}")
     fun getPostByUUID(@PathVariable uuid: UUID): PostResponse {
         redisProducerService.sendMessage("views", mapOf(
@@ -44,5 +40,13 @@ class PostController(
     @DeleteMapping("/delete/{uuid}")
     fun deletePostByUUID(@PathVariable uuid: UUID) {
         postService.deleteById(uuid)
+    }
+
+    @GetMapping
+    fun findPostsByTopicId(@RequestParam("topicId") topicId: Int?): List<PostResponse> {
+        if (topicId == null) {
+            return postService.findAll()
+        }
+        return postService.findPostsByTopicId(topicId)
     }
 }
