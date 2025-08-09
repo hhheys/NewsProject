@@ -1,13 +1,15 @@
 package com.example.NewsProject.response
 
 import com.example.NewsProject.entity.TopicEntity
+import kotlinx.serialization.Serializable
 
-data class TopicResponse(
-    var id: Int?,
-    var name: String?
+@Serializable
+data class TopicResponse (
+    val id: Int,
+    val name: String
 ) {
-    constructor(topic: TopicEntity) : this(
-        id = topic.id,
-        name = topic.name
+    constructor(topicEntity: TopicEntity): this(
+        id = topicEntity.id ?: 0,
+        name = topicEntity.name ?: ""
     )
 }

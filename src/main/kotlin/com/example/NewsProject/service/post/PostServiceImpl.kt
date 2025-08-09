@@ -1,11 +1,12 @@
-package com.example.NewsProject.service
+package com.example.NewsProject.service.post
 
 import com.example.NewsProject.dao.PostRepository
 import com.example.NewsProject.dto.PostCreateDto
 import com.example.NewsProject.dto.PostUpdateDto
 import com.example.NewsProject.entity.PostEntity
-import com.example.NewsProject.response.TopicResponse
 import com.example.NewsProject.response.PostResponse
+import com.example.NewsProject.service.PublisherServiceImpl
+import com.example.NewsProject.service.TopicServiceImpl
 import jakarta.transaction.Transactional
 import org.apache.coyote.BadRequestException
 import org.springframework.stereotype.Service
@@ -67,8 +68,9 @@ class PostServiceImpl(
     }
 
     @Transactional
-    override fun findPostsByTopicId(posts: List<PostResponse>, topics: List<TopicResponse>, topicId: Int): List<PostResponse> {
-        val topicName: String? = topics.find { it.id == topicId }?.name
-        return posts.filter { it.topics.contains<Any?>(topicName) }
+    override fun incrementView(id: UUID) {
+        val post = findById(id)
+        post.viewCount = post.viewCount?.plus(1)
+        postRepository.save(post)
     }
 }
