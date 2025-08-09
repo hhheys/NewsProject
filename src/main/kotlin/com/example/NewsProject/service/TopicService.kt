@@ -5,9 +5,8 @@ import com.example.NewsProject.entity.TopicEntity
 import com.example.NewsProject.response.TopicResponse
 
 interface TopicService {
-    fun getTopicById(id: Int): TopicResponse
     fun getAllTopics(): List<TopicResponse>
-    fun createTopic(topic: TopicDto)
+    fun createTopic(topic: TopicDto): TopicResponse
     fun deleteTopicById(id: Int)
     fun updateTopicById(id: Int, updatedTopic: TopicDto)
     fun findByIds(idList: List<Int>): List<TopicEntity>

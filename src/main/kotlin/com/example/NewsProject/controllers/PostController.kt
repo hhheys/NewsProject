@@ -1,13 +1,14 @@
 package com.example.NewsProject.controllers
 
+import com.example.NewsProject.consts.AccountTypes
 import com.example.NewsProject.dto.PostCreateDto
 import com.example.NewsProject.dto.PostUpdateDto
 import com.example.NewsProject.entity.AccountEntity
-import com.example.NewsProject.entity.PostEntity
 import com.example.NewsProject.response.PostResponse
 import com.example.NewsProject.service.redis.RedisService
 import com.example.NewsProject.service.post.PostServiceImpl
 import org.apache.coyote.BadRequestException
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -19,6 +20,7 @@ class PostController(
     private val redisProducerService: RedisService,
 ) {
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_${AccountTypes.PUBLISHER}')")
     fun createPost(@RequestBody postCreateDto: PostCreateDto, @AuthenticationPrincipal accountDetails: AccountEntity): PostResponse{
         val uuid = accountDetails.id ?: throw BadRequestException("Account uuid not found")
         return postService.createPost(postCreateDto, uuid)

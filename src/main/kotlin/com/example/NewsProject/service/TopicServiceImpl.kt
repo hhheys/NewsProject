@@ -13,27 +13,17 @@ class TopicServiceImpl(
     private val topicRepository: TopicRepository
 ) : TopicService {
     @Transactional
-    override fun getTopicById(id: Int): TopicResponse {
-        val optionalTopic = topicRepository.findById(id)
-        return if (optionalTopic.isPresent) {
-            val topic = optionalTopic.get()
-            TopicResponse(topic)
-        } else {
-            throw BadRequestException("No topic with this id")
-        }
-    }
-
-    @Transactional
     override fun getAllTopics(): List<TopicResponse> {
         return topicRepository.findAll().map { TopicResponse(it) }
     }
 
     @Transactional
-    override fun createTopic(topic: TopicDto) {
+    override fun createTopic(topic: TopicDto): TopicResponse {
         val topicEntity = TopicEntity().apply {
             this.name = topic.name
         }
-        topicRepository.save(topicEntity)
+        val saved = topicRepository.save(topicEntity)
+        return TopicResponse(saved)
     }
 
     @Transactional
@@ -43,7 +33,7 @@ class TopicServiceImpl(
 
     @Transactional
     override fun updateTopicById(id: Int, updatedTopic: TopicDto) {
-        val topicEntity = getTopicById(id)
+        val topicEntity = findById(id)
         topicEntity.name = updatedTopic.name
     }
 
