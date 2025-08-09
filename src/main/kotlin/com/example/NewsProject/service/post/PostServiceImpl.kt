@@ -73,4 +73,9 @@ class PostServiceImpl(
         post.viewCount = post.viewCount?.plus(1)
         postRepository.save(post)
     }
+
+    @Transactional
+    override fun findPostsByTopicId(topicId: Int): List<PostResponse> {
+        return postRepository.findAllByTopic_Id(topicId).map { PostResponse(it) }
+    }
 }

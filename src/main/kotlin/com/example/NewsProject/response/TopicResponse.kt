@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TopicResponse (
     val id: Int,
-    val name: String
+    var name: String
 ) {
     constructor(topicEntity: TopicEntity): this(
         id = topicEntity.id ?: 0,

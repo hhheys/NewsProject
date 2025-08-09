@@ -13,4 +13,5 @@ interface PostService {
     fun updateById(id: UUID, postUpdateDto: PostUpdateDto): PostResponse
     fun deleteById(id: UUID)
     fun incrementView(id: UUID)
+    fun findPostsByTopicId(topicId: Int): List<PostResponse>
 }
