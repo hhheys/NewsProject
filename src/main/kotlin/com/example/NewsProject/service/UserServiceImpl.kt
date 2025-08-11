@@ -4,6 +4,7 @@ import com.example.NewsProject.consts.AccountTypes
 import com.example.NewsProject.dao.UserRepository
 import com.example.NewsProject.dto.UserDto
 import com.example.NewsProject.entity.UserEntity
+import com.example.NewsProject.response.UserResponse
 import jakarta.transaction.Transactional
 import org.apache.coyote.BadRequestException
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -17,7 +18,7 @@ class UserServiceImpl(
 ): UserService {
 
     @Transactional
-    override fun addUser(user: UserDto) {
+    override fun addUser(user: UserDto): UserResponse {
         val userEntity = UserEntity().apply {
             this.name = user.name
             this.password = passwordEncoder.encode(user.password)
@@ -26,6 +27,7 @@ class UserServiceImpl(
             this.accountType = AccountTypes.USER
         }
         userRepository.save(userEntity)
+        return UserResponse(userEntity)
     }
 
     @Transactional

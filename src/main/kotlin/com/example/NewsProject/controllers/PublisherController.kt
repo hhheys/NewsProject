@@ -1,6 +1,7 @@
 package com.example.NewsProject.controllers
 
 import com.example.NewsProject.dto.PublisherDto
+import com.example.NewsProject.response.PublisherResponse
 import com.example.NewsProject.service.PublisherServiceImpl
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,7 +15,7 @@ class PublisherController(
     private val publisherService: PublisherServiceImpl
 ) {
         @PostMapping("/create")
-        fun createPublisher(@RequestBody @Valid publisherDto: PublisherDto) {
-            publisherService.addPublisher(publisherDto)
+        fun createPublisher(@RequestBody @Valid publisherDto: PublisherDto): PublisherResponse {
+            return publisherService.addPublisher(publisherDto)
         }
 }
