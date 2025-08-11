@@ -38,7 +38,11 @@ class PublisherServiceImpl(
             this.legalAddress = publisher.legalAddress
             this.accountType = AccountTypes.PUBLISHER
         }
-        publisherRepository.save(publisherEntity)
-        return PublisherResponse(publisherEntity)
+        try{
+            publisherRepository.save(publisherEntity)
+            return PublisherResponse(publisherEntity)
+        } catch (_: Exception){
+            throw BadRequestException("Failed to create account")
+        }
     }
 }

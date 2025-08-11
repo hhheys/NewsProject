@@ -4,6 +4,7 @@ import com.example.NewsProject.dto.PublisherDto
 import com.example.NewsProject.response.PublisherResponse
 import com.example.NewsProject.service.PublisherServiceImpl
 import jakarta.validation.Valid
+import org.apache.coyote.BadRequestException
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,6 +17,10 @@ class PublisherController(
 ) {
         @PostMapping("/create")
         fun createPublisher(@RequestBody @Valid publisherDto: PublisherDto): PublisherResponse {
-            return publisherService.addPublisher(publisherDto)
+            try{
+                return publisherService.addPublisher(publisherDto)
+            }catch (_: Exception){
+                throw BadRequestException("Failed to create publisher")
+            }
         }
 }

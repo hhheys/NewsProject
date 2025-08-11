@@ -1,6 +1,7 @@
 package com.example.NewsProject.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.Formula
 import java.util.UUID
 
 @Entity
@@ -42,4 +43,16 @@ class PostEntity {
         foreignKey = ForeignKey(name = "post_entity_publisher_fk")
     )
     var publisher: PublisherEntity? = null
+
+    @Formula("(select count(l.reaction_uuid) " +
+            "from like_entity l " +
+            "join reaction r on l.reaction_uuid = r.id " +
+            "where r.post_uuid = id)")
+    var likeCount: Long = 0
+
+    @Formula("(select count(l.reaction_uuid) " +
+            "from dislike l " +
+            "join reaction r on l.reaction_uuid = r.id " +
+            "where r.post_uuid = id)")
+    var dislikeCount: Long = 0
 }

@@ -22,12 +22,16 @@ class UserServiceImpl(
         val userEntity = UserEntity().apply {
             this.name = user.name
             this.password = passwordEncoder.encode(user.password)
-            this.email = user.password
+            this.email = user.email
             this.role = user.role
             this.accountType = AccountTypes.USER
         }
-        userRepository.save(userEntity)
-        return UserResponse(userEntity)
+        try {
+            userRepository.save(userEntity)
+          return UserResponse(userEntity)
+        } catch (_: Exception){
+            throw BadRequestException("Failed to create account")
+        }
     }
 
     @Transactional

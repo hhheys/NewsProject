@@ -2,7 +2,7 @@ package com.example.NewsProject.controllers
 
 import com.example.NewsProject.dto.TopicDto
 import com.example.NewsProject.response.TopicResponse
-import com.example.NewsProject.service.TopicService
+import com.example.NewsProject.service.TopicServiceImpl
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/topics")
 class TopicController(
-    private val topicService: TopicService
+    private val topicService: TopicServiceImpl
 ) {
     @GetMapping("/{id}")
     fun getTopic(@PathVariable id: Int) : TopicResponse {
-        return topicService.getTopicById(id)
+        return TopicResponse(topicService.findById(id))
     }
 
     @GetMapping("/all")
@@ -28,8 +28,8 @@ class TopicController(
     }
 
     @PostMapping("/create")
-    fun createTopic(@RequestBody topicDto: TopicDto) {
-        topicService.createTopic(topicDto)
+    fun createTopic(@RequestBody topicDto: TopicDto): TopicResponse {
+        return topicService.createTopic(topicDto)
     }
 
     @DeleteMapping("/delete/{id}")
