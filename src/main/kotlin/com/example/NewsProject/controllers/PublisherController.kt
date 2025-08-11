@@ -1,6 +1,7 @@
 package com.example.NewsProject.controllers
 
 import com.example.NewsProject.dto.PublisherDto
+import com.example.NewsProject.response.PublisherResponse
 import com.example.NewsProject.service.PublisherServiceImpl
 import jakarta.validation.Valid
 import org.apache.coyote.BadRequestException
@@ -15,9 +16,9 @@ class PublisherController(
     private val publisherService: PublisherServiceImpl
 ) {
         @PostMapping("/create")
-        fun createPublisher(@RequestBody @Valid publisherDto: PublisherDto) {
+        fun createPublisher(@RequestBody @Valid publisherDto: PublisherDto): PublisherResponse {
             try{
-                publisherService.addPublisher(publisherDto)
+                return publisherService.addPublisher(publisherDto)
             }catch (_: Exception){
                 throw BadRequestException("Failed to create publisher")
             }

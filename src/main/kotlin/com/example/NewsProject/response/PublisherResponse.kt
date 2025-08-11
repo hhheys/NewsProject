@@ -10,12 +10,14 @@ data class PublisherResponse (
     @Serializable(with = UUIDSerializer::class)
     val uuid: UUID,
     val name: String,
+    val email: String,
     val legalName: String,
     val legalAddress: String
 ) {
     constructor(publisherEntity: PublisherEntity): this(
         uuid = publisherEntity.id ?: UUID.fromString("0"),
         name = publisherEntity.name ?: "",
+        email = publisherEntity.email ?: "",
         legalName = publisherEntity.legalName ?: "",
         legalAddress = publisherEntity.legalAddress ?: ""
     )

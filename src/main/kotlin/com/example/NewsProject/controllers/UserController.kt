@@ -1,6 +1,7 @@
 package com.example.NewsProject.controllers
 
 import com.example.NewsProject.dto.UserDto
+import com.example.NewsProject.response.UserResponse
 import com.example.NewsProject.service.UserServiceImpl
 import jakarta.validation.Valid
 import org.apache.coyote.BadRequestException
@@ -15,9 +16,9 @@ class UserController(
     private val userService: UserServiceImpl
 ) {
     @PostMapping("/create")
-    fun createUser(@RequestBody @Valid userDto: UserDto) {
+    fun createUser(@RequestBody @Valid userDto: UserDto): UserResponse {
         try{
-            userService.addUser(userDto)
+            return userService.addUser(userDto)
         }catch (_: Exception){
             throw BadRequestException("Failed to create user")
         }
