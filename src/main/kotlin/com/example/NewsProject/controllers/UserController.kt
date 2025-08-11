@@ -3,6 +3,7 @@ package com.example.NewsProject.controllers
 import com.example.NewsProject.dto.UserDto
 import com.example.NewsProject.service.UserServiceImpl
 import jakarta.validation.Valid
+import org.apache.coyote.BadRequestException
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,6 +16,10 @@ class UserController(
 ) {
     @PostMapping("/create")
     fun createUser(@RequestBody @Valid userDto: UserDto) {
-        userService.addUser(userDto)
+        try{
+            userService.addUser(userDto)
+        }catch (_: Exception){
+            throw BadRequestException("Failed to create user")
+        }
     }
 }

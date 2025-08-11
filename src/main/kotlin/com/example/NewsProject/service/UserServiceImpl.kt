@@ -25,7 +25,12 @@ class UserServiceImpl(
             this.role = user.role
             this.accountType = AccountTypes.USER
         }
-        userRepository.save(userEntity)
+        try {
+            userRepository.save(userEntity)
+        } catch (_: Exception){
+            throw BadRequestException("Failed to create account")
+        }
+
     }
 
     @Transactional
