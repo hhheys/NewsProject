@@ -21,7 +21,7 @@ class UserServiceImpl(
         val userEntity = UserEntity().apply {
             this.name = user.name
             this.password = passwordEncoder.encode(user.password)
-            this.email = user.password
+            this.email = user.email
             this.role = user.role
             this.accountType = AccountTypes.USER
         }
