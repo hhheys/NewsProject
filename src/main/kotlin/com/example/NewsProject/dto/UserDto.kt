@@ -16,6 +16,6 @@ data class UserDto(
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     val email: String,
-    @NotEmpty(message = "Role should not be empty")
-    val role: String,
+//    @NotEmpty(message = "Role should not be empty")
+//    val role: String,
 )
