@@ -7,4 +7,5 @@ import java.util.*
 
 interface ReactionRepository: JpaRepository<ReactionEntity, UUID> {
     fun findFirstByPost_IdAndUser_Id(postId: UUID, userId: UUID): ReactionEntity?
+    fun findAllByPost_Id(postId: UUID): List<ReactionEntity>?
 }
