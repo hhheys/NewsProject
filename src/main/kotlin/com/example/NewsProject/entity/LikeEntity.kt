@@ -14,6 +14,6 @@ import jakarta.persistence.Table
     referencedColumnName = "id",
     foreignKey = ForeignKey(name = "like_reaction_fk")
 )
-//@DiscriminatorValue(LIKE)
+@DiscriminatorValue(LIKE)
 class LikeEntity : ReactionEntity() {
 }

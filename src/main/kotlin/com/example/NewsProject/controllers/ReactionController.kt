@@ -3,15 +3,20 @@ package com.example.NewsProject.controllers
 import com.example.NewsProject.consts.AccountTypes
 import com.example.NewsProject.dto.PostReactionDto
 import com.example.NewsProject.entity.AccountEntity
+import com.example.NewsProject.response.ReactionResponse
 import com.example.NewsProject.service.ReactionServiceImpl
 import com.example.NewsProject.service.redis.RedisService
 import org.apache.coyote.BadRequestException
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.UUID
 
 @RestController
 @RequestMapping("/reaction")
@@ -33,6 +38,17 @@ class ReactionController(
             "userUUID" to accountDetails.id.toString(),
             "reactionType" to postReactionDto.type
         ))
+    }
 
+    @DeleteMapping("/remove/{uuid}")
+    @PreAuthorize("hasAnyRole('ROLE_${AccountTypes.USER}', 'ROLE_${AccountTypes.PUBLISHER}')")
+    fun removeReaction(@PathVariable uuid: UUID, @AuthenticationPrincipal accountDetails: AccountEntity){
+        val accountUUID = accountDetails.id ?: throw BadRequestException()
+        reactionService.removeReaction(uuid, accountUUID)
+    }
+
+    @GetMapping("/post/{uuid}")
+    fun getReactionsByPostID(@PathVariable uuid: UUID): MutableList<ReactionResponse> {
+        return reactionService.findAllByPostId(uuid)
     }
 }
