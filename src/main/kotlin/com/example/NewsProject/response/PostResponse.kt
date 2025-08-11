@@ -15,7 +15,9 @@ data class PostResponse(
     var content: String,
     var viewCount: Long,
     @Contextual var topics: MutableList<TopicResponse>,
-    var publisher: PublisherResponse?
+    var publisher: PublisherResponse?,
+    var likeCount: Long,
+    val dislikeCount: Long
 ) {
     constructor(postEntity: PostEntity) : this(
         uuid = postEntity.id,
@@ -24,6 +26,8 @@ data class PostResponse(
         content = postEntity.content ?: "",
         viewCount = postEntity.viewCount ?: 0,
         topics = postEntity.topic?.map { TopicResponse(it) }?.toMutableList() ?: mutableListOf(),
-        publisher = postEntity.publisher?.let { PublisherResponse(it) }
+        publisher = postEntity.publisher?.let { PublisherResponse(it) },
+        likeCount = postEntity.likeCount,
+        dislikeCount = postEntity.dislikeCount
     )
 }

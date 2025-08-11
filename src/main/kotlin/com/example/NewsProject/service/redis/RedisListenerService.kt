@@ -22,12 +22,16 @@ class RedisListenerService(
             val type = record.value["reactionType"] ?: continue
             val postUUID = UUID.fromString(record.value["postUUID"]) ?: throw BadRequestException()
             val userUUID = UUID.fromString(record.value["userUUID"]) ?: throw BadRequestException()
-
-            when (type) {
-                "like" -> postReactionService.addLike(postUUID, userUUID)
-                "dislike" -> postReactionService.addDislike(postUUID, userUUID)
-                else -> continue
+            try {
+                when (type) {
+                    "like" -> postReactionService.addLike(postUUID, userUUID)
+                    "dislike" -> postReactionService.addDislike(postUUID, userUUID)
+                    else -> continue
+                }
+            } catch (e: Exception){
+                println("Failed to add reaction.")
             }
+
         }
     }
 

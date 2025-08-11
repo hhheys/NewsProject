@@ -25,7 +25,6 @@ class ReactionServiceImpl(
     override fun addLike(postUUID: UUID, userUUID: UUID): PostReactionResponse {
         val post = postService.findById(postUUID)
         val user = userService.findById(userUUID)
-        println(user)
         val like = LikeEntity().apply {
             this.post = post
             this.user = user
