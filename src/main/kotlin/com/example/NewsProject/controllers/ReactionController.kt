@@ -20,7 +20,7 @@ class ReactionController(
     private val reactionService: ReactionServiceImpl
 ) {
     @PostMapping("/add")
-    @PreAuthorize("hasAnyRole('ROLE_${AccountTypes.USER}', 'ROLE_${AccountTypes.PUBLISHER}')")
+    @PreAuthorize("hasRole('ROLE_${AccountTypes.USER}')")
     fun addReactionPost(@RequestBody postReactionDto: PostReactionDto, @AuthenticationPrincipal accountDetails: AccountEntity){
         if (postReactionDto.type !in listOf("like","dislike")){
             throw BadRequestException("Reaction type not found")
