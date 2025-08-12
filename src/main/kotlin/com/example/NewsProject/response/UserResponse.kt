@@ -10,11 +10,11 @@ data class UserResponse(
     @Serializable(with = UUIDSerializer::class)
     val id: UUID,
     val name: String,
-    val role: String
+    val email: String
 ) {
     constructor(userEntity: UserEntity): this(
         id = userEntity.id ?: UUID.fromString("0"),
         name = userEntity.name ?: "",
-        role = userEntity.role ?: ""
+        email = userEntity.email ?: ""
     )
 }
