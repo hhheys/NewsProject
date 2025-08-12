@@ -23,7 +23,7 @@ class UserServiceImpl(
             this.name = user.name
             this.password = passwordEncoder.encode(user.password)
             this.email = user.email
-            this.role = user.role
+//            this.role = user.role
             this.accountType = AccountTypes.USER
         }
         try {
