@@ -5,7 +5,7 @@ import com.example.NewsProject.dto.PostCreateDto
 import com.example.NewsProject.dto.PostUpdateDto
 import com.example.NewsProject.entity.AccountEntity
 import com.example.NewsProject.response.PostResponse
-import com.example.NewsProject.service.redis.RedisService
+import com.example.NewsProject.service.kafka.KafkaService
 import com.example.NewsProject.service.post.PostServiceImpl
 import org.apache.coyote.BadRequestException
 import org.springframework.security.access.prepost.PreAuthorize
@@ -17,7 +17,7 @@ import java.util.*
 @RequestMapping("/posts")
 class PostController(
     private val postService: PostServiceImpl,
-    private val redisProducerService: RedisService,
+    private val kafkaService: KafkaService
 ) {
     @PostMapping("/create")
     @PreAuthorize("hasRole('ROLE_${AccountTypes.PUBLISHER}')")
@@ -28,9 +28,7 @@ class PostController(
 
     @GetMapping("/{uuid}")
     fun getPostByUUID(@PathVariable uuid: UUID): PostResponse {
-        redisProducerService.sendMessage("views", mapOf(
-            "postUUID" to uuid.toString()
-        ))
+        kafkaService.incrementView(uuid)
         return PostResponse(postService.findById(uuid))
     }
 

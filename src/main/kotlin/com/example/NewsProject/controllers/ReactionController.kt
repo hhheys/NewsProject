@@ -5,7 +5,7 @@ import com.example.NewsProject.dto.PostReactionDto
 import com.example.NewsProject.entity.AccountEntity
 import com.example.NewsProject.response.ReactionResponse
 import com.example.NewsProject.service.ReactionServiceImpl
-import com.example.NewsProject.service.redis.RedisService
+import com.example.NewsProject.service.kafka.KafkaService
 import org.apache.coyote.BadRequestException
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -21,8 +21,8 @@ import java.util.UUID
 @RestController
 @RequestMapping("/reaction")
 class ReactionController(
-    private val redisProducerService: RedisService,
-    private val reactionService: ReactionServiceImpl
+    private val reactionService: ReactionServiceImpl,
+    private val kafkaService: KafkaService
 ) {
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_${AccountTypes.USER}')")
@@ -33,11 +33,7 @@ class ReactionController(
         if (reactionService.findByPostUUIDandUserUUID(postReactionDto.postUUID, accountDetails.id!!) != null){
             throw BadRequestException("Reaction is already added")
         }
-        redisProducerService.sendMessage("reactions", mapOf(
-            "postUUID" to postReactionDto.postUUID.toString(),
-            "userUUID" to accountDetails.id.toString(),
-            "reactionType" to postReactionDto.type
-        ))
+        kafkaService.addReaction(postReactionDto, accountDetails.id!!)
     }
 
     @DeleteMapping("/remove/{uuid}")
