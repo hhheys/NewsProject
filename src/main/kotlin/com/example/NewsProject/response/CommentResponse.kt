@@ -2,17 +2,22 @@ package com.example.NewsProject.response
 
 import com.example.NewsProject.entity.CommentEntity
 import com.example.NewsProject.utils.UUIDSerializer
+import io.swagger.v3.oas.annotations.media.Schema
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
 @Serializable
 data class CommentResponse (
     @Serializable(with = UUIDSerializer::class)
+    @Schema(description = "UUID комментария")
     val id: UUID,
     @Serializable(with = UUIDSerializer::class)
+    @Schema(description = "UUID поста")
     val postUUID: UUID,
     @Serializable(with = UUIDSerializer::class)
+    @Schema(description = "UUID пользователя, оставившего комментарий")
     val userUUID: UUID,
+    @Schema(description = "Содержание")
     val content: String
 ) {
     constructor(comment: CommentEntity): this(

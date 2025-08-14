@@ -52,6 +52,9 @@ dependencies {
 
     // Docs
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0")
+
+    // kafka
+    implementation("org.springframework.kafka:spring-kafka:3.3.8")
 }
 
 kotlin {
