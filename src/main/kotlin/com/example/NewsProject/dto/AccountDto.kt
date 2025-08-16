@@ -16,12 +16,10 @@ data class AccountDto(
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     val email: String,
-    @NotEmpty(message = "Legal name should not be empty")
     @Size(min = 2, message = "Legal name should be at least 2 characters long")
-    val legalName: String,
-    @NotEmpty(message = "Legal address should not be empty")
+    val legalName: String? = null,
     @Size(min = 2, message = "Legal address should be at least 2 characters long")
-    val legalAddress: String,
+    val legalAddress: String? = null,
     @NotEmpty(message = "Account type should not be empty")
     val accountType: String,
 )

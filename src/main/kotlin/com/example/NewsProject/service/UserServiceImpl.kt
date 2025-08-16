@@ -2,7 +2,7 @@ package com.example.NewsProject.service
 
 import com.example.NewsProject.consts.AccountTypes
 import com.example.NewsProject.dao.UserRepository
-import com.example.NewsProject.dto.UserDto
+import com.example.NewsProject.dto.AccountDto
 import com.example.NewsProject.entity.UserEntity
 import com.example.NewsProject.response.UserResponse
 import jakarta.transaction.Transactional
@@ -18,12 +18,11 @@ class UserServiceImpl(
 ): UserService {
 
     @Transactional
-    override fun addUser(user: UserDto): UserResponse {
+    override fun addUser(user: AccountDto): UserResponse {
         val userEntity = UserEntity().apply {
             this.name = user.name
             this.password = passwordEncoder.encode(user.password)
             this.email = user.email
-            this.role = user.role
             this.accountType = AccountTypes.USER
         }
         try {
