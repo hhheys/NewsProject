@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class RedisService(
-    private val redisTemplate: RedisTemplate<String, String>
+    private val redisTemplate: RedisTemplate<String, String>,
 ) {
     fun sendMessage(streamKey: String, message: Map<String, String>) {
         val record = MapRecord.create(streamKey, message)

@@ -3,9 +3,9 @@ package com.example.NewsProject.service
 import com.example.NewsProject.dao.TopicRepository
 import com.example.NewsProject.dto.TopicDto
 import com.example.NewsProject.entity.TopicEntity
+import com.example.NewsProject.handlers.exceptions.BadRequestException
 import com.example.NewsProject.response.TopicResponse
 import jakarta.transaction.Transactional
-import org.apache.coyote.BadRequestException
 import org.springframework.stereotype.Service
 
 @Service

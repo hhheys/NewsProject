@@ -32,6 +32,7 @@ dependencies {
     implementation("org.flywaydb:flyway-core:$flywayVersion")
     implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
     // Spring security
+//    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.security:spring-security-core:6.5.1")
     implementation("org.springframework.security:spring-security-web:6.5.1")
     implementation("org.springframework.security:spring-security-config:6.5.1")
@@ -50,7 +51,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
     // Docs
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0")
+
+    // kafka
+    implementation("org.springframework.kafka:spring-kafka:3.3.8")
 }
 
 kotlin {
