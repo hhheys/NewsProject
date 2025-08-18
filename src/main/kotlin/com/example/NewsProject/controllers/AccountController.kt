@@ -5,16 +5,20 @@ import com.example.NewsProject.dto.AccountDto
 import com.example.NewsProject.handlers.exceptions.BadRequestException
 import com.example.NewsProject.service.PublisherServiceImpl
 import com.example.NewsProject.service.UserServiceImpl
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController("/account")
+@Tag(name = "Account", description = "Логика взаимодействия с аккаунтами.")
 class AccountController(
     private val publisherService: PublisherServiceImpl,
     private val userService: UserServiceImpl
 ) {
     @PostMapping("/register")
+    @Operation(summary = "Регистрация пользователя.")
     fun createAccount(@RequestBody accountDto: AccountDto): Any {
         if (accountDto.accountType == AccountTypes.USER) {
             return userService.addUser(accountDto)
