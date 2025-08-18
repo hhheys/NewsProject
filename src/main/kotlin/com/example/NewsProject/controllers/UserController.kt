@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(
     private val userService: UserServiceImpl
 ) {
-    @PostMapping("/create")
-    fun createUser(@RequestBody @Valid userDto: UserDto): UserResponse {
-        try{
-            return userService.addUser(userDto)
-        }catch (_: Exception){
-            throw BadRequestException("Failed to create user")
-        }
-    }
+//    @PostMapping("/create")
+//    fun createUser(@RequestBody @Valid userDto: UserDto): UserResponse {
+//        try{
+//            return userService.addUser(userDto)
+//        }catch (_: Exception){
+//            throw BadRequestException("Failed to create user")
+//        }
+//    }
 }

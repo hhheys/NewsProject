@@ -2,8 +2,8 @@ package com.example.NewsProject.service
 
 import com.example.NewsProject.consts.AccountTypes
 import com.example.NewsProject.dao.PublisherRepository
+import com.example.NewsProject.dto.AccountDto
 import com.example.NewsProject.entity.PublisherEntity
-import com.example.NewsProject.dto.PublisherDto
 import com.example.NewsProject.response.PublisherResponse
 import jakarta.transaction.Transactional
 import org.apache.coyote.BadRequestException
@@ -29,7 +29,7 @@ class PublisherServiceImpl(
     }
 
     @Transactional
-    override fun addPublisher(publisher: PublisherDto): PublisherResponse {
+    override fun addPublisher(publisher: AccountDto): PublisherResponse {
         val publisherEntity = PublisherEntity().apply {
             this.name = publisher.name
             this.password = passwordEncoder.encode(publisher.password)

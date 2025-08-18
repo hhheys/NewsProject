@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController
 class PublisherController(
     private val publisherService: PublisherServiceImpl
 ) {
-        @PostMapping("/create")
-        fun createPublisher(@RequestBody @Valid publisherDto: PublisherDto): PublisherResponse {
-            try{
-                return publisherService.addPublisher(publisherDto)
-            }catch (_: Exception){
-                throw BadRequestException("Failed to create publisher")
-            }
-        }
+//        @PostMapping("/create")
+//        fun createPublisher(@RequestBody @Valid publisherDto: PublisherDto): PublisherResponse {
+//            try{
+//                return publisherService.addPublisher(publisherDto)
+//            }catch (_: Exception){
+//                throw BadRequestException("Failed to create publisher")
+//            }
+//        }
 }
