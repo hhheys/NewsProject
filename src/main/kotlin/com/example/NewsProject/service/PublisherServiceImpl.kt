@@ -45,4 +45,9 @@ class PublisherServiceImpl(
             throw BadRequestException("Failed to create account")
         }
     }
+
+    @Transactional
+    override fun findAllPublishers(): List<PublisherResponse> {
+        return publisherRepository.findAll().map { PublisherResponse(it) }
+    }
 }

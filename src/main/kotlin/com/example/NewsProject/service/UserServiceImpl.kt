@@ -42,4 +42,9 @@ class UserServiceImpl(
         print("not found ${id.toString()}")
         throw BadRequestException("User not found")
     }
+
+    @Transactional
+    override fun findAllUsers(): List<UserResponse> {
+        return userRepository.findAll().map { UserResponse(it) }
+    }
 }

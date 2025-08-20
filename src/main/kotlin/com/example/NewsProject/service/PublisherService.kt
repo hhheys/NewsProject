@@ -8,4 +8,5 @@ import java.util.UUID
 interface PublisherService {
     fun addPublisher(publisher: AccountDto): PublisherResponse
     fun findById(uuid: UUID): PublisherEntity
+    fun findAllPublishers(): List<PublisherResponse>
 }

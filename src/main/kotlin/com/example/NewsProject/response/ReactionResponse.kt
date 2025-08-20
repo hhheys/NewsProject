@@ -14,12 +14,16 @@ data class ReactionResponse (
     @Serializable(with = UUIDSerializer::class)
     @Schema(description = "UUID пользователя")
     var userUUID: UUID,
+    @Serializable(with = UUIDSerializer::class)
+    @Schema(description = "UUID поста")
+    var postUUID: UUID,
     @Schema(description = "Тип реакции(like/dislike)")
     var type: String
 ) {
     constructor(reaction: ReactionEntity):this(
         id = reaction.id ?: UUID.fromString("0"),
         userUUID = reaction.user?.id ?: UUID.fromString("0"),
+        postUUID  = reaction.post?.id ?: UUID.fromString("0"),
         type = reaction.reactionType ?: ""
     )
 }

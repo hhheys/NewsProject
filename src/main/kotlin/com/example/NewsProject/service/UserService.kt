@@ -8,4 +8,5 @@ import java.util.UUID
 interface UserService {
     fun addUser(user: AccountDto): UserResponse
     fun findById(id: UUID): UserEntity
+    fun findAllUsers(): List<UserResponse>
 }

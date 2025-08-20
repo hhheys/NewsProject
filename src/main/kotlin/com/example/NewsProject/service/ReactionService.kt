@@ -12,4 +12,5 @@ interface ReactionService {
     fun findByPostUUIDandUserUUID(postUUID: UUID, userUUID: UUID): ReactionEntity?
     fun removeReaction(reactionUUID: UUID, userUUID: UUID)
     fun findAllByPostId(postUUID: UUID): MutableList<ReactionResponse>
+    fun getAllReactionsByUserId(userId: UUID): List<ReactionResponse>
 }

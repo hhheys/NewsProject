@@ -76,4 +76,9 @@ class ReactionServiceImpl(
         val reactionResponses = reactions.map { ReactionResponse(it) }
         return reactionResponses.toMutableList()
     }
+
+    @Transactional
+    override fun getAllReactionsByUserId(userId: UUID): List<ReactionResponse> {
+        return reactionRepository.getAllByUser_Id(userId).map { ReactionResponse(it) }
+    }
 }
